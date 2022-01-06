@@ -7,15 +7,15 @@ import { auth } from "../firebaseconfig";
 
 const LoginForm = () => {
     const {handleLogin}=useContextProvoider();
-    const email=useRef();
-    const password=useRef();
+    const emailRef=useRef();
+    const passwordRef=useRef();
     const navigate=useNavigate();
 
     const login=async(e)=>{
         e.preventDefault()
         try{
-            const email=email.current.value
-            const password=password.current.value
+            const email=emailRef.current.value
+            const password=passwordRef.current.value
             await signInWithEmailAndPassword(auth,email,password);
         navigate('/');
         }catch(e){
@@ -29,9 +29,9 @@ const LoginForm = () => {
             <div className="form-div">
             <form>
             <p>Email:</p>
-            <input ref={email} type='email' placeholder="Email"/>
+            <input ref={emailRef} type='email' placeholder="Email"/>
             <p>Password:</p>
-            <input ref={password} type='password' placeholder="Password"/>
+            <input ref={passwordRef} type='password' placeholder="Password"/>
             <button onClick={login}>Log In</button>
             </form>
             <div className="forget-pass">

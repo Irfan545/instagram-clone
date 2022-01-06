@@ -1,5 +1,6 @@
 import IMG from "../profile.jpg";
 const PostsCard = () => {
+  
   return (
     <div>
       <div className="posts-div">
