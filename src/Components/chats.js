@@ -1,35 +1,50 @@
 import IMG from '../profile.jpg';
+import NavBar from './nav';
+import { useContextProvoider } from '../context';
 const Chat = () => {
+	const { usersData } = useContextProvoider();
+	console.log(usersData);
 	return (
 		<>
+			<NavBar />
 			<div className='chat-div'>
 				<div className='owner-name'>
 					<p className='name'>Irfan</p>
 					<div className='user-chats'>
-						<div className='single-user'>
-							<div className='img-name'>
-								<div className='img-name-msg'>
-									<img src={IMG} alt='img' />
-									<div>
-										<h4>Irfan</h4>
-										<p>Hi</p>
+						{usersData &&
+							usersData.map((user) => {
+								return (
+									<div className='single-user' key={user.id}>
+										<div className='img-name'>
+											<div
+												className='img-name-msg'
+												style={{ position: 'relative' }}
+											>
+												<img src={IMG} alt='img' />
+												{user.isOnline && (
+													<div
+														style={{
+															width: '12px',
+															height: '12px',
+															borderRadius: '50%',
+															background: '#33DA6D',
+															border: '2px solid #ddd',
+															position: 'absolute',
+															bottom: '0px',
+															left: '40px',
+														}}
+													></div>
+												)}
+												<div>
+													<h4>{user.username}</h4>
+													<p>Hi</p>
+												</div>
+											</div>
+											<div className='online'></div>
+										</div>
 									</div>
-								</div>
-								<div className='online'></div>
-							</div>
-						</div>
-						<div className='single-user'>
-							<div className='img-name'>
-								<div className='img-name-msg'>
-									<img src={IMG} alt='img' />
-									<div>
-										<h4>Irfan</h4>
-										<p>Hi</p>
-									</div>
-								</div>
-								<div className='online'></div>
-							</div>
-						</div>
+								);
+							})}
 					</div>
 				</div>
 
