@@ -25,6 +25,23 @@ const NavBar = () => {
       console.log(url);
     }
   };
+
+  const Logout = async (e) => {
+		e.preventDefault();
+		try {
+			console.log(auth.currentUser.uid);
+			const userId = auth.currentUser.uid;
+			const docRef = doc(db, 'users', userId);
+			const payload = {
+				isOnline: false,
+				lastSeen: Timestamp.fromDate(new Date()),
+			};
+			await updateDoc(docRef, payload);
+			await signOut(auth);
+		} catch (e) {
+			console.log(e.error);
+		}
+	};
   return (
     <div className="nav-bar-div">
       <nav className="nav">
@@ -158,7 +175,7 @@ const NavBar = () => {
               ></circle>
             </svg>
           </div>
-          <div className="heart-logo">
+          <div className="heart-logo" onClick={Logout}>
             <svg
               aria-label="Activity Feed"
               // class="_8-yf5 "

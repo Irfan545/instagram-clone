@@ -1,4 +1,4 @@
-import IMG from "../profile.jpg";
+import IMG from '../profile.jpg';
 const PostsCard = () => {
   
   return (
