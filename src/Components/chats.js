@@ -9,7 +9,7 @@ const Chat = () => {
             <div className="single-user">
               <div className="img-name">
                 <div className="img-name-msg">
-                  <img src={IMG} />
+                  <img src={IMG} alt='img'/>
                   <div>
                     <h4>Irfan</h4>
                     <p>Hi</p>
@@ -21,7 +21,7 @@ const Chat = () => {
             <div className="single-user">
               <div className="img-name">
                 <div className="img-name-msg">
-                  <img src={IMG} />
+                  <img src={IMG} alt='img'/>
                   <div>
                     <h4>Irfan</h4>
                     <p>Hi</p>
@@ -36,7 +36,7 @@ const Chat = () => {
         <div className="chat-container">
           <div className="chat-profile">
             <div className="chat-img-name">
-              <img src={IMG} />
+              <img src={IMG} alt='img'/>
               <div className="name-lastseen">
                 <p>Irfan</p>
                 <small>Last seen 2 min ago</small>
@@ -44,7 +44,7 @@ const Chat = () => {
             </div>
             <svg
               aria-label="View thread details"
-              class="_8-yf5 "
+              // class="_8-yf5 "
               color="#262626"
               fill="#262626"
               height="24"
@@ -58,17 +58,17 @@ const Chat = () => {
                 fill="none"
                 r="10.5"
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
               ></circle>
               <circle cx="11.819" cy="7.709" r="1.25"></circle>
               <line
                 fill="none"
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 x1="10.569"
                 x2="13.432"
                 y1="16.777"
@@ -78,18 +78,30 @@ const Chat = () => {
                 fill="none"
                 points="10.569 11.05 12 11.05 12 16.777"
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
               ></polyline>
             </svg>
+          </div>
+          <div className="messages">
+            <div className="mymsgs">
+              <div className="my-msg">
+                <p>heyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy</p>
+              </div>
+            </div>
+            <div className="theremsgs">
+              <div className="there-msg">
+                <p>hello</p>
+              </div>
+            </div>
           </div>
           <div className="input-button-container">
             {/* Messages here */}
             <div className="input-button">
               <svg
                 aria-label="Emoji"
-                class="_8-yf5 "
+                // class="_8-yf5 "
                 color="#262626"
                 fill="#262626"
                 height="24"
@@ -102,7 +114,7 @@ const Chat = () => {
               <input type="text" placeholder="Message..." />
               <svg
                 aria-label="Add Photo or Video"
-                class="_8-yf5 "
+                // class="_8-yf5 "
                 color="#262626"
                 fill="#262626"
                 height="24"
@@ -112,27 +124,27 @@ const Chat = () => {
               >
                 <path
                   d="M6.549 5.013A1.557 1.557 0 108.106 6.57a1.557 1.557 0 00-1.557-1.557z"
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                 ></path>
                 <path
                   d="M2 18.605l3.901-3.9a.908.908 0 011.284 0l2.807 2.806a.908.908 0 001.283 0l5.534-5.534a.908.908 0 011.283 0l3.905 3.905"
                   fill="none"
                   stroke="currentColor"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                 ></path>
                 <path
                   d="M18.44 2.004A3.56 3.56 0 0122 5.564h0v12.873a3.56 3.56 0 01-3.56 3.56H5.568a3.56 3.56 0 01-3.56-3.56V5.563a3.56 3.56 0 013.56-3.56z"
                   fill="none"
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                 ></path>
               </svg>
               <svg
                 aria-label="Like"
-                class="_8-yf5 "
+                // class="_8-yf5 "
                 color="#262626"
                 fill="#262626"
                 height="24"

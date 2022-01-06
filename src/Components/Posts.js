@@ -5,8 +5,8 @@ const PostsCard = () => {
       <div className="posts-div">
         <div className="post-head">
           <div className="user">
-            <img src={IMG} />
-            <lable className="profile-name">Irfan</lable>
+            <img src={IMG} alt='img'/>
+            <p className="profile-name">Irfan</p>
           </div>
           <div>...</div>
         </div>
@@ -18,7 +18,7 @@ const PostsCard = () => {
             <div className="icon">
               <svg
                 aria-label="Like"
-                class="_8-yf5 "
+                // class="_8-yf5 "
                 color="#262626"
                 fill="#262626"
                 height="24"
@@ -32,7 +32,7 @@ const PostsCard = () => {
             <div className="icon">
               <svg
                 aria-label="Comment"
-                class="_8-yf5 "
+                // class="_8-yf5 "
                 color="#262626"
                 fill="#262626"
                 height="24"
@@ -44,15 +44,15 @@ const PostsCard = () => {
                   d="M20.656 17.008a9.993 9.993 0 10-3.59 3.615L22 22z"
                   fill="none"
                   stroke="currentColor"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                 ></path>
               </svg>
             </div>
             <div className="icon">
               <svg
                 aria-label="Share Post"
-                class="_8-yf5 "
+                // class="_8-yf5 "
                 color="#262626"
                 fill="#262626"
                 height="24"
@@ -63,8 +63,8 @@ const PostsCard = () => {
                 <line
                   fill="none"
                   stroke="currentColor"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   x1="22"
                   x2="9.218"
                   y1="3"
@@ -74,8 +74,8 @@ const PostsCard = () => {
                   fill="none"
                   points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334"
                   stroke="currentColor"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                 ></polygon>
               </svg>
             </div>
@@ -83,7 +83,7 @@ const PostsCard = () => {
           <div className="save">
             <svg
               aria-label="Save"
-              class="_8-yf5 "
+              // class="_8-yf5 "
               color="#262626"
               fill="#262626"
               height="24"
@@ -95,9 +95,9 @@ const PostsCard = () => {
                 fill="none"
                 points="20 21 12 13.44 4 21 4 3 20 3 20 21"
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
               ></polygon>
             </svg>
           </div>
@@ -115,7 +115,7 @@ const PostsCard = () => {
           <div className="comment-elements">
             <svg
               aria-label="Emoji"
-              class="_8-yf5 "
+              // class="_8-yf5 "
               color="#262626"
               fill="#262626"
               height="24"
