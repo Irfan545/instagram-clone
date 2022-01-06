@@ -58,7 +58,7 @@ const Register = () => {
 					</h2>
 					<div className='form-div'>
 						<form>
-							<input type='text' ref={name} placeholder='User name' />
+							<input type='text' ref={name} minLength='6' placeholder='User name' />
 							<input type='email' ref={useremail} placeholder='Email' />
 							<input
 								type='password'
