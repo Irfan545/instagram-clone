@@ -52,7 +52,8 @@ const Register = () => {
       console.log(e);
     }
   };
-  const logout = async () => {
+  const logout = async (e) => {
+      e.preventDefault()
     try {
       console.log(auth.currentUser.uid);
       const userId = auth.currentUser.uid;
