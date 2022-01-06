@@ -1,7 +1,7 @@
-import { arrayUnion, doc, serverTimestamp, Timestamp, updateDoc } from "firebase/firestore";
+import { addDoc, arrayUnion, collection, doc, onSnapshot, serverTimestamp, Timestamp, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { useState } from "react";
-import {signOut} from "firebase/auth"
+import { useEffect, useState } from "react";
+import {signOut} from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth, db, storage } from "../firebaseconfig";
 import IMG from "../profile.jpg";
@@ -23,6 +23,13 @@ const NavBar = () => {
       const url = await getDownloadURL(storageRef , imgDetails.name)
       await updateDoc(doc(db,"users",auth.currentUser.uid),{
         posts:arrayUnion(url)
+      })
+      await addDoc(collection(db,"posts"),{
+        
+        postUrl:url,
+        likes:0,
+        comments:"",
+        uploadedTime:Timestamp.fromDate(new Date())
       })
       console.log(url);
     }

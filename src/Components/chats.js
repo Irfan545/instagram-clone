@@ -6,6 +6,7 @@ const Chat = () => {
 				<div className='owner-name'>
 					<p className='name'>Irfan</p>
 					<div className='user-chats'>
+
 						<div className='single-user'>
 							<div className='img-name'>
 								<div className='img-name-msg'>
@@ -18,6 +19,8 @@ const Chat = () => {
 								<div className='online'></div>
 							</div>
 						</div>
+
+						
 						<div className='single-user'>
 							<div className='img-name'>
 								<div className='img-name-msg'>
