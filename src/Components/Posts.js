@@ -16,12 +16,16 @@ import Moment from "react-moment";
 import { auth, db } from "../firebaseconfig";
 import IMG from "../profile.jpg";
 import PNG from "../heart.png"
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
+import { useContextProvoider } from "../context";
 const PostsCard = () => {
   const [Posts, setPosts] = useState();
   const [liked, setliked] = useState(false);
   const [buttonDisable,setbuttonDisable]=useState(false);
   const commentRef=useRef();
-  const [getPosts,setgetPosts]=useState();
+  const {setgetPosts} = useContextProvoider();
+  const navigate = useNavigate();
 //   console.log(Posts);
 
   useEffect(() => {
@@ -55,7 +59,6 @@ const PostsCard = () => {
     }
   };
 
-console.log(getPosts);
 const handleComment=async(id,postcomments)=>{
 setbuttonDisable(true);
 const currentUserId=auth.currentUser.uid
@@ -67,15 +70,20 @@ commentRef.current.value=null;
 setbuttonDisable(false)
 }
 const gotoProfile=async(userid)=>{
-  const q = query(collection(db,"posts"),where("userId","==",userid))
-  const docSnap= await getDocs(q);
-  const posts=[]; 
-//  console.log(docSnap.data())
- docSnap.forEach(d=>{
-  //  console.log(d.data())
-  posts.push(d.data());
- })
- setgetPosts(posts);
+ try{
+  const q = query(collection(db, "posts"), where("userId", "==", userid));
+  const docSnap = await getDocs(q);
+  const posts = [];
+  //  console.log(docSnap.data())
+  docSnap.forEach((d) => {
+    //  console.log(d.data())
+    posts.push({data:d.data(),id:d.id});
+  });
+  setgetPosts(posts);
+  navigate(`/userProfile/${userid}`)
+ }catch(e){
+   console.log(e)
+ }
 }
   return (
     <div>

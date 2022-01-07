@@ -7,6 +7,7 @@ import Chat from './Components/chats';
 import Register from './Components/register';
 import ContextProvoider from './context';
 import RequiredAuth from './Components/RequiredAuth';
+import UserProfile from './Components/userProfile';
 
 function App() {
 	return (
@@ -31,6 +32,7 @@ function App() {
 							</RequiredAuth>
 						}
 					/>
+					<Route path='/userProfile/:id' element={<UserProfile/>}/>
 				</Routes>
 			</ContextProvoider>
 		</BrowserRouter>

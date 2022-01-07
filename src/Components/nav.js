@@ -26,15 +26,15 @@ console.log(currentUserData)
         userId:auth.currentUser.uid,
         posturl:url,
         uploadedAt:Timestamp.fromDate(new Date()),
-        likes:[],
-		comments:[],
+        likes:[""],
+		comments:[""],
 		username:currentUserData.username,
 		profilePicture:"www.xyz.com",
         // comments:[{comment:"Comment",id:auth.currentUser.uid}]
       })
-			// await updateDoc(doc(db, 'users', auth.currentUser.uid), {
-			// 	posts: arrayUnion(url),
-			// });
+			await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+				posts: arrayUnion(url),
+			});
 			console.log(url);
 		}
 	};
@@ -210,6 +210,7 @@ console.log(currentUserData)
 				</div>
 				<div className='profile'>
 					<img src={IMG} alt='img' />
+					
 				</div>
 			</nav>
 		</div>

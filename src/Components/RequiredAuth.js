@@ -13,3 +13,4 @@ export default function RequiredAuth({ children }) {
 		<Navigate to='/login' replace state={{ path: location.pathname }} />
 	);
 }
+// this needs to understand
