@@ -27,6 +27,7 @@ console.log(currentUserData)
         posturl:url,
         uploadedAt:Timestamp.fromDate(new Date()),
         likes:[],
+		comments:[],
 		username:currentUserData.username,
 		profilePicture:"www.xyz.com",
         // comments:[{comment:"Comment",id:auth.currentUser.uid}]

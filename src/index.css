@@ -294,6 +294,7 @@ body {
 
 .icon {
     cursor: pointer;
+    fill: #ed4956;
     margin-right: 1rem;
 }
 

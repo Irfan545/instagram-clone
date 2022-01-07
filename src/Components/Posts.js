@@ -3,20 +3,25 @@ import {
   arrayUnion,
   collection,
   doc,
+  getDoc,
+  getDocs,
   onSnapshot,
   orderBy,
   query,
-  updateDoc
+  updateDoc,
+  where
 } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Moment from "react-moment";
 import { auth, db } from "../firebaseconfig";
 import IMG from "../profile.jpg";
-import SVG from "../heart.svg"
+import PNG from "../heart.png"
 const PostsCard = () => {
   const [Posts, setPosts] = useState();
   const [liked, setliked] = useState(false);
-
+  const [buttonDisable,setbuttonDisable]=useState(false);
+  const commentRef=useRef();
+  const [getPosts,setgetPosts]=useState();
 //   console.log(Posts);
 
   useEffect(() => {
@@ -50,6 +55,28 @@ const PostsCard = () => {
     }
   };
 
+console.log(getPosts);
+const handleComment=async(id,postcomments)=>{
+setbuttonDisable(true);
+const currentUserId=auth.currentUser.uid
+const comment=commentRef.current.value
+await updateDoc(doc(db,"posts",id),{
+  comments:arrayUnion({id:currentUserId,usercomment:comment,userProfile:""})
+})
+commentRef.current.value=null;
+setbuttonDisable(false)
+}
+const gotoProfile=async(userid)=>{
+  const q = query(collection(db,"posts"),where("userId","==",userid))
+  const docSnap= await getDocs(q);
+  const posts=[]; 
+//  console.log(docSnap.data())
+ docSnap.forEach(d=>{
+  //  console.log(d.data())
+  posts.push(d.data());
+ })
+ setgetPosts(posts);
+}
   return (
     <div>
       {Posts &&
@@ -58,7 +85,7 @@ const PostsCard = () => {
             <div className="post-head">
               <div className="user">
                 <img src={IMG} alt="img" />
-                <p className="profile-name">{post.username}</p>
+                <p className="profile-name" onClick={()=>{gotoProfile(post.userId)}}>{post.username}</p>
               </div>
               <div>...</div>
             </div>
@@ -73,12 +100,13 @@ const PostsCard = () => {
                     handlelike(post.id, post.likes);
                   }}
                 >
-					{/* <img style={{width:"24px",height:"24px",color:"red"}} src={SVG}/> */}
+					{/* <img style={{width:"24px",height:"24px",fill:"orange"}} src={PNG}/> */}
                   <svg
-                    aria-label="Unlike"
+                    aria-label="Like"
                     // class="_8-yf5 "
 					color={liked?"#ed4956":"#262626"}
                     fill={liked?"#ed4956":"#262626"}
+					
                     height="24"
                     role="img"
                     viewBox="0 0 24 24"
@@ -167,7 +195,7 @@ const PostsCard = () => {
               <div className="page-name">
                 <p> Pagedfkjsahfkasjhfaskfhaskdshfskljfhsakffsahfkas</p>
               </div>
-              <p className="comments-link"> View all comments</p>
+              <p className="comments-link"> View {post.comments.length} comments</p>
               <small>
                 <Moment fromNow>{post.uploadedAt.toDate()}</Moment>
               </small>
@@ -186,8 +214,8 @@ const PostsCard = () => {
                 >
                   <path d="M15.83 10.997a1.167 1.167 0 101.167 1.167 1.167 1.167 0 00-1.167-1.167zm-6.5 1.167a1.167 1.167 0 10-1.166 1.167 1.167 1.167 0 001.166-1.167zm5.163 3.24a3.406 3.406 0 01-4.982.007 1 1 0 10-1.557 1.256 5.397 5.397 0 008.09 0 1 1 0 00-1.55-1.263zM12 .503a11.5 11.5 0 1011.5 11.5A11.513 11.513 0 0012 .503zm0 21a9.5 9.5 0 119.5-9.5 9.51 9.51 0 01-9.5 9.5z"></path>
                 </svg>
-                <input placeholder="Add comment" />
-                <button className="post-btn">Post</button>
+                <input ref={commentRef} placeholder="Add comment" />
+                <button onClick={()=>{handleComment(post.id,post.comments)}} className="post-btn" disabled={buttonDisable}>Post</button>
               </div>
             </div>
           </div>
