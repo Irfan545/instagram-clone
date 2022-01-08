@@ -117,6 +117,7 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    flex-wrap: nowrap !important;
 }
 
 .logo-header {
@@ -413,12 +414,12 @@ body {
     font-weight: 600;
 }
 
-.user-chats {
+/* .user-chats {
 
+} */
     /* height: calc(100vh- 135px);
   width: calc(100vw- 160px); */
     /* background-color: chocolate; */
-}
 
 .single-user {
     /* background-color: #3333; */
@@ -460,38 +461,44 @@ body {
 }
 
 .chat-profile {
+    background-color: #0095F6;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem;
+    padding: 0 1.5rem;
     height: 60px;
     border-bottom: 1px solid rgb(202, 202, 202);
 }
 
 .chat-img-name {
+    background-color: #8e8e8e;
     font-family: 'Montserrat';
     display: flex;
+    align-items: center;
 }
 
-.chat-img-name small {
+.chat-img-name .small {
+    background-color: #dbdbdb;
     margin-bottom: .5rem;
     font-size: .5rem;
 }
 
-.chat-img-name p {
+.chat-img-name .p {
+    /* margin: 10px 0; */
+    background-color: #ed4956;
     position: relative;
     font-weight: 600;
 }
 
 .chat-img-name img {
-    width: 30px;
     margin-right: .8rem;
     border-radius: 50%;
     object-fit: cover;
+    width: 30px;
     height: 30px;
 }
 
-.input-button-container {}
+/* .input-button-container {} */
 
 .input-button {
     margin: 0 1rem;
@@ -740,3 +747,7 @@ body {
 .dropdown-content a:hover {
     background-color: #f1f1f1;
 }
+
+/* @media (max-width<1080){
+    .na
+} */

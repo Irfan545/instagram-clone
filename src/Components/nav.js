@@ -230,7 +230,7 @@ const NavBar = () => {
 							setIsOpen(!isOpen);
 						}}
 					/>
-					<div class='dropdown-content' id='dropdown_uniq'>
+					<div className='dropdown-content' id='dropdown_uniq'>
 						<Link to={'/my-profile'}>My Profile</Link>
 						<Link to={'/edit-profile'}>Edit Profile</Link>
 						<a href='logout' onClick={Logout}>

@@ -4,6 +4,9 @@ import { useContextProvoider } from "../context";
 const Chat = () => {
   const { usersData,currentUserData} = useContextProvoider();
   console.log(currentUserData.username);
+  const selectUser=async(user1)=>{
+
+  }
   return (
     <>
       <NavBar />
@@ -14,7 +17,7 @@ const Chat = () => {
             {usersData &&
               usersData.map((user) => {
                 return (
-                  <div className="single-user" key={user.id}>
+                  <div className="single-user" key={user.id} onClick={()=>selectUser(user.id)}>
                     <div className="img-name">
                       <div
                         className="img-name-msg"
@@ -53,8 +56,8 @@ const Chat = () => {
             <div className="chat-img-name">
               <img src={IMG} alt="img" />
               <div className="name-lastseen">
-                <p>Irfan</p>
-                <small>Last seen 2 min ago</small>
+                <p className="p">Irfan</p>
+                <small className="small">Last seen 2 min ago</small>
               </div>
             </div>
             <svg

@@ -69,6 +69,7 @@ await updateDoc(doc(db,"posts",id),{
 commentRef.current.value=null;
 setbuttonDisable(false)
 }
+
 const gotoProfile=async(userid)=>{
  try{
   const q = query(collection(db, "posts"), where("userId", "==", userid));
@@ -203,7 +204,7 @@ const gotoProfile=async(userid)=>{
               <div className="page-name">
                 <p> Pagedfkjsahfkasjhfaskfhaskdshfskljfhsakffsahfkas</p>
               </div>
-              <p className="comments-link"> View {post.comments.length} comments</p>
+              <p className="comments-link"> View {post?.comments?.length} comments</p>
               <small>
                 <Moment fromNow>{post.uploadedAt.toDate()}</Moment>
               </small>
