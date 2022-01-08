@@ -8,6 +8,7 @@ import Register from './Components/register';
 import ContextProvoider from './context';
 import RequiredAuth from './Components/RequiredAuth';
 import UserProfile from './Components/userProfile';
+import NotFound from './Components/NotFound';
 
 function App() {
 	return (
@@ -32,7 +33,8 @@ function App() {
 							</RequiredAuth>
 						}
 					/>
-					<Route path='/userProfile/:id' element={<UserProfile/>}/>
+					<Route path='/userProfile/:id' element={<UserProfile />} />
+					<Route path='*' element={<NotFound />} />
 				</Routes>
 			</ContextProvoider>
 		</BrowserRouter>

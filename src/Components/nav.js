@@ -35,8 +35,8 @@ const NavBar = () => {
 				userId: auth.currentUser.uid,
 				posturl: url,
 				uploadedAt: Timestamp.fromDate(new Date()),
-				likes: [''],
-				comments: [''],
+				likes: [],
+				comments: [],
 				username: currentUserData.username,
 				profilePicture: 'www.xyz.com',
 				// comments:[{comment:"Comment",id:auth.currentUser.uid}]
