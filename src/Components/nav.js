@@ -1,17 +1,26 @@
-import { addDoc, arrayUnion, collection, doc, serverTimestamp, Timestamp, updateDoc } from 'firebase/firestore';
+import {
+	addDoc,
+	arrayUnion,
+	collection,
+	doc,
+	Timestamp,
+	updateDoc,
+} from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { signOut } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { auth, db, storage } from '../firebaseconfig';
 import IMG from '../profile.jpg';
 import { useContextProvoider } from '../context';
+import { useState } from 'react';
 const NavBar = () => {
-	const {currentUserData}=useContextProvoider();
+	const { currentUserData } = useContextProvoider();
+	const [isOpen, setIsOpen] = useState(false);
 	const navigate = useNavigate();
 	const messageRoute = () => {
 		navigate('/chats');
 	};
-console.log(currentUserData)
+	console.log(currentUserData);
 	const UploadImg = async (e) => {
 		if (e?.target?.files[0]) {
 			const imgDetails = e.target.files[0];
@@ -22,16 +31,16 @@ console.log(currentUserData)
 			);
 			await uploadBytes(storageRef, imgDetails);
 			const url = await getDownloadURL(storageRef, imgDetails.name);
-      await addDoc(collection(db,'posts'),{
-        userId:auth.currentUser.uid,
-        posturl:url,
-        uploadedAt:Timestamp.fromDate(new Date()),
-        likes:[""],
-		comments:[""],
-		username:currentUserData.username,
-		profilePicture:"www.xyz.com",
-        // comments:[{comment:"Comment",id:auth.currentUser.uid}]
-      })
+			await addDoc(collection(db, 'posts'), {
+				userId: auth.currentUser.uid,
+				posturl: url,
+				uploadedAt: Timestamp.fromDate(new Date()),
+				likes: [''],
+				comments: [''],
+				username: currentUserData.username,
+				profilePicture: 'www.xyz.com',
+				// comments:[{comment:"Comment",id:auth.currentUser.uid}]
+			});
 			await updateDoc(doc(db, 'users', auth.currentUser.uid), {
 				posts: arrayUnion(url),
 			});
@@ -193,7 +202,7 @@ console.log(currentUserData)
 							></circle>
 						</svg>
 					</div>
-					<div className='heart-logo' onClick={Logout}>
+					<div className='heart-logo'>
 						<svg
 							aria-label='Activity Feed'
 							// class="_8-yf5 "
@@ -209,8 +218,25 @@ console.log(currentUserData)
 					</div>
 				</div>
 				<div className='profile'>
-					<img src={IMG} alt='img' />
-					
+					<img
+						src={IMG}
+						alt='img'
+						onClick={() => {
+							isOpen
+								? (document.getElementById('dropdown_uniq').style.display =
+										'none')
+								: (document.getElementById('dropdown_uniq').style.display =
+										'block');
+							setIsOpen(!isOpen);
+						}}
+					/>
+					<div class='dropdown-content' id='dropdown_uniq'>
+						<Link to={'/my-profile'}>My Profile</Link>
+						<Link to={'/edit-profile'}>Edit Profile</Link>
+						<a href='logout' onClick={Logout}>
+							Logout
+						</a>
+					</div>
 				</div>
 			</nav>
 		</div>
