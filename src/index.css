@@ -386,6 +386,100 @@ body {
 }
 
 /* chat design */
+.messages{
+    max-height: 500px;
+    overflow-y: auto;
+}
+.msg-wrapper {
+    /* position: relative; */
+    /* text-overflow:inherit; */
+    /* overflow-y: auto;
+    overflow-wrap: inherit; */
+    /* height: calc(100vh - 180px); */
+    /* overflow:hidden; */
+    max-height: 350px;
+    max-width: 590px;
+    /* overflow-y:auto; */
+    /* padding: 0 0.5rem; */
+  }
+  .msg-wrapper img {
+    width: 100%;
+    /* border: 5px solid gray; */
+    height: 50%;
+    padding: 0.5rem 0;
+    display: flex;
+    border-radius: 0.5rem;
+  }
+  /* .try{
+
+      max-width: 50%;
+    } */
+    .try p{
+        /* width: 50%; */
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+        margin-bottom: 0.2rem;
+        max-width: 100%;
+        overflow-wrap: break-word;
+    }
+    .my{
+        border: 1px solid rgba(27, 31, 35, 0.10);
+    }
+    .there{
+        border: 1px solid rgba(27, 31, 35, 0.10);
+        background-color: #EFEFEF;
+    }
+    .msg-wrapper .try {
+        
+        /* box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+        rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+        rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; */
+        /* box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px; */
+        /* overflow-wrap: break-word; */
+        /* background-color: #0998F6; */
+        /* overflow-x:hidden; */
+        
+        max-width: 50%;
+        margin-top: 0.1rem;
+    padding: 8px;
+    display: inline-block;
+    text-align: left;
+    border-radius: 0.5rem;
+}
+  .msg-wrapper small {
+      
+      /* display: inline-block; */
+      /* margin-top: 0.5rem; */
+      opacity: 0.8;
+    }
+    .msg-wrapper.own {
+        text-align: right;
+    }
+    .me {
+        /* background-color: var(--color3); */
+        /* From https://css.glass */
+        /* background: rgba(62, 146, 204, 0.23); */
+        border-radius: 16px;
+        /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */
+        /* backdrop-filter: blur(10px); */
+        /* -webkit-backdrop-filter: blur(10px); */
+        /* border: 2px solid rgba(62, 146, 204, 1); */
+        /* color: rgb(0, 0, 0); */
+        color: #000;
+    }
+    .friend {
+        /* background-color: whitesmoke; */
+        /* background: rgba(216, 49, 91, 0.26); */
+        border-radius: 16px;
+        /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */
+        /* backdrop-filter: blur(10px); */
+    /* -webkit-backdrop-filter: blur(10px); */
+    /* border: 2px solid rgba(216, 49, 91, 0.99); */
+    color: #000;
+    /* background-color: aqua; */
+  }
+/* trying */
 .chat-div {
     border: 1px solid rgb(202, 202, 202);
     border-radius: 3px;
@@ -395,9 +489,10 @@ body {
     display: grid;
     grid-template-columns: 1.7fr 3fr;
     column-gap: 0;
-    overflow: hidden;
-    height: calc(100vh - 90px);
-    width: calc(100vw- 160px);
+    /* overflow-y:scroll; */
+    height: calc(100vh - 125px);
+    width: calc(100vw- 330px);
+    /* object-fit: contain; */
 }
 
 .owner-name {
@@ -405,21 +500,22 @@ body {
     border-bottom: 1px solid rgb(202, 202, 202);
     /* background: #0095F6; */
     height: 60px;
+    
 }
 
-.name {
+.name{
     margin: 1rem;
+    /* color: #ed4956; */
     text-align: center;
     font-family: 'Montserrat';
     font-weight: 600;
 }
 
-/* .user-chats {
+.user-chats{
+    height: calc(100vh- 135px);
 
-} */
-    /* height: calc(100vh- 135px);
-  width: calc(100vw- 160px); */
-    /* background-color: chocolate; */
+ width: calc(100vw- 160px); 
+} 
 
 .single-user {
     /* background-color: #3333; */
@@ -461,7 +557,7 @@ body {
 }
 
 .chat-profile {
-    background-color: #0095F6;
+    /* background-color: #0095F6; */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -471,21 +567,23 @@ body {
 }
 
 .chat-img-name {
-    background-color: #8e8e8e;
+    /* background-color: #8e8e8e; */
     font-family: 'Montserrat';
     display: flex;
     align-items: center;
 }
 
-.chat-img-name .small {
-    background-color: #dbdbdb;
+.chat-img-name small {
+    /* background-color: #dbdbdb; */
     margin-bottom: .5rem;
     font-size: .5rem;
 }
 
-.chat-img-name .p {
+.chat-img-name p {
     /* margin: 10px 0; */
-    background-color: #ed4956;
+    margin: 0;
+    padding: 0;
+    /* background-color: #ed4956; */
     position: relative;
     font-weight: 600;
 }
@@ -503,12 +601,13 @@ body {
 .input-button {
     margin: 0 1rem;
     position: absolute;
-    width: 60%;
+    width: 57%;
     border-radius: 40px;
     border: 1px solid rgba(27, 31, 35, 0.20);
     height: 45px;
     bottom: 20px;
     display: flex;
+    background-color: #fff;
     align-items: center;
     /* right: 20px; */
 }
@@ -519,69 +618,35 @@ body {
     padding: 0;
     font-size: 1rem;
     margin: 0 1rem;
-    width: 70%;
+    width: 65%;
 }
 
 .input-button svg {
     margin: 0 .5rem;
 }
-
+.send-button{
+    margin: 0;
+    background: none;
+    border: none;
+    outline: none;
+    color: #0998F6;
+    font-size: .8rem;
+    font-weight: 600;
+    margin-left: 1rem;
+    padding: .5rem .5rem;
+    border-radius: .5rem;
+}
+.send-button:hover{
+    color: #FFF;
+    background-color: #0998F6;
+}
 .messages {
+    padding: 0 1rem;
     width: 100%;
     height: 78%;
     /* background-color: aqua; */
 }
 
-.mymsgs {
-    margin-top: .5rem;
-    display: flex;
-    text-align: right;
-    justify-content: right;
-    background-color: #fff;
-    /* width: 50%; */
-}
-
-.theremsgs {
-    margin-top: .5rem;
-    display: flex;
-    text-align: left;
-    justify-content: left;
-    background-color: #fff;
-}
-
-.my-msg {
-    /*   */
-    width: min-content;
-    /* width: 50%; */
-}
-
-.my-msg p {
-    position: relative;
-    left: 11rem;
-    padding: 1rem;
-    margin: 0 1rem;
-    /* border: 1px solid rgba(27, 31, 35, 0.10); */
-    border-radius: 1.5rem;
-    font-size: .8rem;
-    background-color: #EFEFEF;
-    width: 50%;
-    word-wrap: break-word;
-}
-
-.there-msg {
-    width: 50%;
-
-}
-
-.there-msg p {
-    padding: 1rem;
-    margin: 0 1rem;
-    border-radius: 1.5rem;
-    font-size: .8rem;
-    border: 1px solid rgba(27, 31, 35, 0.10);
-    /* background-color: #EFEFEF; */
-    width: min-content;
-}
 
 .info-div {
     color: #8e8e8e;
@@ -751,3 +816,15 @@ body {
 /* @media (max-width<1080){
     .na
 } */
+
+
+
+
+
+
+
+
+/* Insta ui new css */
+
+
+
