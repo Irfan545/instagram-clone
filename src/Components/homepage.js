@@ -1,13 +1,13 @@
 // import IMG from '../profile.jpg';
 import Stories from './stories';
-import Posts from './Posts';
-import NavBar from './nav';
+// import Posts from './Posts';
+// import NavBar from './nav';
 const HomePage = () => {
 	return (
 		<>
-			<NavBar />
+			{/* <NavBar /> */}
 			<Stories />
-			<Posts />
+			{/* <Posts /> */}
 		</>
 	);
 };
