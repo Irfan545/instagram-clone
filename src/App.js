@@ -1,6 +1,7 @@
 import LoginForm from './Components/login';
 import HomePage from './Components/homepage';
-import './index.css';
+// import './index.css';
+import './style.css';
 import { Routes, Route } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
 import Chat from './Components/chats';

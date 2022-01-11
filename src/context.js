@@ -26,9 +26,7 @@ export default function ContextProvoider({ children }) {
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
-			console.log(user);
-			setUser(user);
-
+			
 			const getCurrentUserData = async () => {
 				try {
 					const q = query(
@@ -42,9 +40,10 @@ export default function ContextProvoider({ children }) {
 					});
 					setcurrentUserData(user);
 				} catch (e) {
-					console.log('user currently not Logged In ');
+					console.log(e.error);
 				}
 			};
+			setUser(user);
 			setLoader(false);
 			getCurrentUserData();
 		});
@@ -64,6 +63,7 @@ export default function ContextProvoider({ children }) {
 			return unsubscribe();
 		});
 	}, []);
+
 	useEffect(() => {
 		const getcurrentUser = () => {
 			if (User && usersData) {
@@ -79,7 +79,7 @@ export default function ContextProvoider({ children }) {
 		};
 		return getcurrentUser();
 		// return unsub;
-	}, [usersData]);
+	}, [usersData , User]);
 
 	const value = {
 		User,
@@ -96,3 +96,54 @@ export default function ContextProvoider({ children }) {
 		)
 	);
 }
+
+
+// .mymsgs {
+//   margin-top: .5rem;
+//   display: flex;
+//   text-align: right;
+//   justify-content: right;
+//   background-color: #fff;
+//   /* width: 50%; */
+// }
+
+// .theremsgs {
+//   margin-top: .5rem;
+//   display: flex;
+//   text-align: left;
+//   justify-content: left;
+//   background-color: #fff;
+// }
+
+// .my-msg {
+//   /*   */
+//   width: min-content;
+//   /* width: 50%; */
+// }
+
+// .my-msg p {
+//   position: relative;
+//   left: 11rem;
+//   padding: 1rem;
+//   /* margin-right: 1rem; */
+//   /* border: 1px solid rgba(27, 31, 35, 0.10); */
+//   border-radius: 1.5rem;
+//   font-size: .8rem;
+//   background-color: #EFEFEF;
+//   width: 50%;
+//   word-wrap: break-word;
+// }
+
+// .there-msg {
+//   width: 50%;
+// }
+
+// .there-msg p {
+//   padding: 1rem;
+//   /* margin: 0 1rem; */
+//   border-radius: 1.5rem;
+//   font-size: .8rem;
+//   border: 1px solid rgba(27, 31, 35, 0.10);
+//   /* background-color: #EFEFEF; */
+//   width: min-content;
+// }
