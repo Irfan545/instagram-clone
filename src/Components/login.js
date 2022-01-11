@@ -1,9 +1,8 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { doc, updateDoc } from 'firebase/firestore';
 import { useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router';
 import { useContextProvoider } from '../context';
-import { auth, db } from '../firebaseconfig';
+import { auth } from '../firebaseconfig';
 
 const LoginForm = () => {
 	const { User } = useContextProvoider();
@@ -25,7 +24,7 @@ const LoginForm = () => {
 			await signInWithEmailAndPassword(auth, email, password);
 			navigate('/');
 		} catch (e) {
-			console.log(e.error);
+			console.log(e);
 		}
 	};
 	return (

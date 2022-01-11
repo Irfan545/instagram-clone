@@ -26,6 +26,7 @@ export default function ContextProvoider({ children }) {
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
+			console.log(user);
 			setUser(user);
 
 			const getCurrentUserData = async () => {
@@ -49,7 +50,7 @@ export default function ContextProvoider({ children }) {
 		});
 
 		return unsubscribe();
-	}, []);
+	}, [User]);
 
 	useEffect(() => {
 		const q = query(collection(db, 'users'));
@@ -69,9 +70,11 @@ export default function ContextProvoider({ children }) {
 				usersData.forEach((data) => {
 					if (data.id === User.uid) {
 						setcurrentUserData(data);
-                        setLoader2(false);
+						setLoader2(false);
 					}
 				});
+			} else if (User === null) {
+				setLoader2(false);
 			}
 		};
 		return getcurrentUser();
