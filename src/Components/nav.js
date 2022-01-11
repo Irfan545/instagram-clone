@@ -54,22 +54,7 @@ const NavBar = () => {
     }
   };
 
-  const Logout = async (e) => {
-    e.preventDefault();
-    try {
-      console.log(auth.currentUser.uid);
-      const userId = auth.currentUser.uid;
-      const docRef = doc(db, "users", userId);
-      const payload = {
-        isOnline: false,
-        lastSeen: Timestamp.fromDate(new Date())
-      };
-      await updateDoc(docRef, payload);
-      await signOut(auth);
-    } catch (e) {
-      console.log(e.error);
-    }
-  };
+  
   return (
       <nav className="navbar">
         <div className="nav-wrapper">
@@ -97,7 +82,8 @@ const NavBar = () => {
 			  </label>
             <img src={EXPLORE} className="icon" alt="" />
             <img src={LIKE} className="icon" alt="logo" />
-            <div className="icon user-profile" 
+            <div className="icon user-profile"
+             
 			// onClick={() => {
             //   isOpen
             //     ? (document.getElementById("dropdown_uniq").style.display =

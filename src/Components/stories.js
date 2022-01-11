@@ -3,8 +3,33 @@ import PostsCard from './Posts';
 import IMG from '../img/cover 1.png'
 import { useContextProvoider } from '../context';
 import NavBar from './nav';
+import { doc, Timestamp, updateDoc } from 'firebase/firestore';
+import { auth, db } from '../firebaseconfig';
+import { signOut } from 'firebase/auth';
+import { useNavigate } from 'react-router';
+
 const Stories = () => {
-    const {usersData}=useContextProvoider();
+    const {usersData,currentUserData}=useContextProvoider();
+    const navigate=useNavigate();
+    console.log(currentUserData)
+    const Logout = async (e) => {
+        e.preventDefault();
+        try {
+          console.log(auth.currentUser.uid);
+          const userId = auth.currentUser.uid;
+          const docRef = doc(db, "users", userId);
+          const payload = {
+            isOnline: false,
+            lastSeen: Timestamp.fromDate(new Date())
+          };
+          await updateDoc(docRef, payload);
+          await signOut(auth);
+          navigate("/login")
+        } catch (e) {
+          console.log(e.error);
+        }
+      };
+
     return (
         
     //     <div className='story-div'>
@@ -16,6 +41,7 @@ const Stories = () => {
     //       </div>
     //   </div>
     <>
+
     <NavBar />
     <section className="main">
       <div className="wrapper">
@@ -41,16 +67,16 @@ const Stories = () => {
         </div>
         {/* <!-- left section ended --> */}
         {/* <!-- right section start --> */}
-        <div className="right-col">
+        {currentUserData && <div className="right-col">
             <div className="profile-card">
                 <div className="profile-pic">
                     <img src="img/profile-pic.png" alt=""/>
                 </div>
                 <div>
-                    <p className="username">modern_web_channel</p>
-                    <p className="sub-text">kunaal kumar</p>
+                    <p className="username">{currentUserData.email}</p>
+                    <p className="sub-text">{currentUserData.username}</p>
                 </div>
-                <button className="action-btn">switch</button>
+                <button className="action-btn" onClick={Logout}>Logout</button>
             </div>
             <p className="suggestion-text">Suggestions for you</p>
             <div className="profile-card">
@@ -103,7 +129,7 @@ const Stories = () => {
                 </div>
                 <button className="action-btn">follow</button>
             </div>
-        </div>
+        </div>}
         {/* <!-- right section ennded --> */}
 
       </div>
