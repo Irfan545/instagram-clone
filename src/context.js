@@ -26,26 +26,30 @@ export default function ContextProvoider({ children }) {
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
-			
-			const getCurrentUserData = async () => {
-				try {
-					const q = query(
-						collection(db, 'users'),
-						where('id', '==', auth.currentUser.uid),
-					);
-					const docSnap = await getDocs(q);
-					const user = [];
-					docSnap.forEach((d) => {
-						user.push(d.data());
-					});
-					setcurrentUserData(user);
-				} catch (e) {
-					console.log(e.error);
-				}
-			};
-			setUser(user);
-			setLoader(false);
-			getCurrentUserData();
+			if (user !== null) {
+				const getCurrentUserData = async () => {
+					try {
+						const q = query(
+							collection(db, 'users'),
+							where('id', '==', auth.currentUser.uid),
+						);
+						const docSnap = await getDocs(q);
+						const user = [];
+						docSnap.forEach((d) => {
+							user.push(d.data());
+						});
+						setcurrentUserData(user);
+					} catch (e) {
+						console.log(e);
+					}
+				};
+				getCurrentUserData();
+			} else {
+				setUser(user);
+				setLoader(false);
+				setcurrentUserData(user);
+				console.log(user);
+			}
 		});
 
 		return unsubscribe();
@@ -79,7 +83,7 @@ export default function ContextProvoider({ children }) {
 		};
 		return getcurrentUser();
 		// return unsub;
-	}, [usersData , User]);
+	}, [usersData, User]);
 
 	const value = {
 		User,
@@ -96,7 +100,6 @@ export default function ContextProvoider({ children }) {
 		)
 	);
 }
-
 
 // .mymsgs {
 //   margin-top: .5rem;
