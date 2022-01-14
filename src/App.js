@@ -29,9 +29,9 @@ function App() {
 					<Route
 						path='/chats'
 						element={
-							<RequiredAuth>
+							// <RequiredAuth>
 								<Chat />
-							</RequiredAuth>
+							// </RequiredAuth>
 						}
 					/>
 					<Route path='/userProfile/:id' element={<UserProfile />} />

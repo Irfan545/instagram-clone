@@ -11,7 +11,9 @@ const LoginForm = () => {
 	const passwordRef = useRef();
 	const navigate = useNavigate();
 	useEffect(() => {
+		console.log(User);
 		if (User) {
+			console.log('object');
 			navigate(state?.path || '/');
 		}
 	}, [User, state?.path, navigate]);
