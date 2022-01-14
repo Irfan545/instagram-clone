@@ -20,7 +20,6 @@ const Chat = () => {
 	const { usersData, currentUserData } = useContextProvoider();
 	const [msgs, setmsgs] = useState();
 	const [text, settext] = useState();
-	// const [User,setUser]=useState();
 	const [chat, setchat] = useState('');
 	const [img, setimg] = useState('');
 	const [sendDisabled, setsendDisabled] = useState(false);

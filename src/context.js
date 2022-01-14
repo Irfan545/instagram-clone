@@ -17,7 +17,7 @@ export function useContextProvoider() {
 }
 
 export default function ContextProvoider({ children }) {
-	const [User, setUser] = useState();
+	const [User, setUser] = useState(null);
 	const [loader, setLoader] = useState(true);
 	const [loader2, setLoader2] = useState(true);
 	const [usersData, setUsersData] = useState([]);
@@ -45,11 +45,10 @@ export default function ContextProvoider({ children }) {
 				};
 				getCurrentUserData();
 			} else {
-				setUser(user);
-				setLoader(false);
 				setcurrentUserData(user);
-				console.log(user);
 			}
+			setUser(user);
+			setLoader(false);
 		});
 
 		return unsubscribe();
@@ -92,7 +91,6 @@ export default function ContextProvoider({ children }) {
 		getPosts,
 		setgetPosts,
 	};
-
 	return (
 		!loader &&
 		!loader2 && (

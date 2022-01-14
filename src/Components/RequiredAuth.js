@@ -5,6 +5,7 @@ import { auth } from '../firebaseconfig';
 export default function RequiredAuth({ children }) {
 	const location = useLocation();
 	const user1 = auth.currentUser?.uid;
+	console.log(user1);
 	return user1 ? (
 		children
 	) : (
