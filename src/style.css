@@ -12,7 +12,7 @@
 
 body{
     width: 100%;
-    background-color: #fafafa;
+    background-color: #fafafa !important;
     position: relative;
     font-family: 'roboto', sans-serif;
 }
@@ -90,7 +90,7 @@ body{
     padding: 40px 0;
     display: flex;
     justify-content: center;
-    margin-top: 50px;
+    margin-top: 10px ;
 }
 
 .wrapper{
@@ -348,7 +348,73 @@ body{
     font-size: .8rem;
     color: gray;
 }
-
+.comments-modal{
+    /* position: absolute; */
+    border-radius: .3rem;
+    padding: 1rem;
+    position: fixed;
+    top: 20px;
+    left: 10vw;
+    height: 95vh;
+    width: 60vw;
+    background-color: #fff;
+    transition: .2s ease-in-out;
+    border: 1px solid rgba(27, 31, 35, 0.20);
+}
+.user-comment{
+    margin-top: 10px;
+    margin-left: 10px;
+    padding: 1rem;
+    width: max-content;
+    max-width: 60%;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: #fafafa;
+}
+.inputdiv .icon{
+    width: 2rem;
+    height: 2rem;
+}
+.viewcoments{
+    /* background-color: rosybrown; */
+    overflow-y: auto;
+    height: 80%;
+}
+.comments-modal .head{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(27, 31, 35, 0.20);
+    height: 10%;
+}
+.inputdiv{
+    /* background-color: salmon; */
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid rgba(27, 31, 35, 0.20);
+}
+.inputdiv input{
+    /* outline: none; */
+    width: 80%;
+    height: 100%;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    margin-right: .5rem;
+    /* padding: .5rem; */
+    /* width: 70%; */
+}
+.comments-modal button{
+    background-color: #fff;
+    color: #0998F6;
+    font-weight: 700;
+    border: none;
+    outline: none;
+}
+.cmts-close{
+    display: none;
+}
 @media (max-width: 1100px){
     .right-col, .search-box{
         display: none;
@@ -360,7 +426,12 @@ body{
     .wrapper{
         display: block;
     }
+    .comments-modal{
+        left: 5vw;
+        width: 90vw;
+    }
     .chat-div{
+        margin: 15px 15px;
         width: 80%;
         /* margin: 15px 150px; */
     }
@@ -370,7 +441,16 @@ body{
      width: calc(100vw- 160px); 
     } 
 }
-
+.drop-items{
+    /* style={{cursor:"pointer",padding:"5px 0",display:"block",textAlign:"center"}} */
+    cursor: pointer;
+    padding: 5px 0;
+    display: block;
+    text-align: center;
+}
+.drop-items:hover{
+    background-color: #ddd;
+}
 @media (max-width: 500px){
     .nav-items .icon{
         margin: 0 5px;
@@ -378,6 +458,7 @@ body{
     .post-image{
         height: 300px;
     }
+    
     .chat-div{
 
         margin: 15px 15px;
@@ -484,8 +565,8 @@ body{
     border: 1px solid rgb(202, 202, 202);
     border-radius: 3px;
     background-color: #FFF;
-    margin: 15px 165px;
     position: relative;
+    margin: 15px 165px;
     display: grid;
     grid-template-columns: 1.7fr 3fr;
     column-gap: 0;

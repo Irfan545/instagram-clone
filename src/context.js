@@ -22,6 +22,7 @@ export default function ContextProvoider({ children }) {
 	const [loader2, setLoader2] = useState(true);
 	const [usersData, setUsersData] = useState([]);
 	const [currentUserData, setcurrentUserData] = useState();
+	// const [currentUserPosts, setcurrentUserPosts] = useState();
 	const [getPosts, setgetPosts] = useState();
 
 	useEffect(() => {
@@ -39,20 +40,25 @@ export default function ContextProvoider({ children }) {
 							user.push(d.data());
 						});
 						setcurrentUserData(user);
+						setLoader2(false);
+						
 					} catch (e) {
+						setLoader2(false);
 						console.log(e);
 					}
 				};
 				getCurrentUserData();
 			} else {
 				setcurrentUserData(user);
+				console.log("No User")
+				setUser(user);
 			}
 			setUser(user);
 			setLoader(false);
 		});
 
 		return unsubscribe();
-	}, [User]);
+	}, []);
 
 	useEffect(() => {
 		const q = query(collection(db, 'users'));
@@ -67,22 +73,7 @@ export default function ContextProvoider({ children }) {
 		});
 	}, []);
 
-	useEffect(() => {
-		const getcurrentUser = () => {
-			if (User && usersData) {
-				usersData.forEach((data) => {
-					if (data.id === User.uid) {
-						setcurrentUserData(data);
-						setLoader2(false);
-					}
-				});
-			} else if (User === null) {
-				setLoader2(false);
-			}
-		};
-		return getcurrentUser();
-		// return unsub;
-	}, [usersData, User]);
+	
 
 	const value = {
 		User,

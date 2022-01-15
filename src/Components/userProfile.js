@@ -8,6 +8,7 @@ const UserProfile = () => {
     const {id}=useParams();
     const [profileUser,setProfileUser]=useState();
     // console.log(usersData)
+
     useEffect(()=>{
         const getUser=()=>{
             usersData.forEach(user=>{
@@ -27,7 +28,7 @@ const UserProfile = () => {
         <div className="profile-header">
             <div className="header-container">
             <div className="user-profile">
-                <img src={IMG} alt="Profile-picture"/>
+                <img src={profileUser?.profileUrl || IMG} alt="Profile-picture"/>
             </div>
             <div className="user-details">
                 {profileUser?<h1>{profileUser.username}</h1>:<h1>NO NAME</h1>}

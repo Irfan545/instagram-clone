@@ -1,6 +1,6 @@
 // import IMG from '../profile.jpg'
 import PostsCard from './Posts';
-import IMG from '../img/cover 1.png';
+import IMG from '../profile.png';
 import { useContextProvoider } from '../context';
 import NavBar from './nav';
 import { auth, db } from '../firebaseconfig';
@@ -9,7 +9,7 @@ import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
 const Stories = () => {
-	const { usersData } = useContextProvoider();
+	const { usersData,currentUserData } = useContextProvoider();
 	const navigate = useNavigate();
 
 	const Logout = async (e) => {
@@ -49,7 +49,7 @@ const Stories = () => {
 								usersData.map((user) => (
 									<div className='status-card' key={user.id}>
 										<div className='profile-pic'>
-											<img src={IMG} alt='' />
+											<img src={user?.profileUrl||IMG} alt='' />
 										</div>
 										<p className='username'>{user.username}</p>
 									</div>

@@ -7,13 +7,14 @@ import {
 	onSnapshot,
 	orderBy,
 	query,
+	Timestamp,
 	updateDoc,
 	where,
 } from 'firebase/firestore';
 import { useEffect, useRef, useState } from 'react';
 import Moment from 'react-moment';
 import { auth, db } from '../firebaseconfig';
-import IMG from '../img/cover 2.png';
+import IMG from '../profile.png';
 import OPTION from '../img/option.PNG';
 import LIKE from '../img/like.PNG';
 import COMMENT from '../img/comment.PNG';
@@ -25,10 +26,13 @@ import { useContextProvoider } from '../context';
 const PostsCard = () => {
 	const [Posts, setPosts] = useState();
 	const [liked, setliked] = useState(false);
+	const [show, setshow] = useState(false);
 	const [buttonDisable, setbuttonDisable] = useState(false);
 	const [text, setText] = useState('');
-	const { setgetPosts } = useContextProvoider();
+	const { setgetPosts,currentUserData } = useContextProvoider();
 	const navigate = useNavigate();
+	const [comments,setcomments]=useState();
+	const scrollRef = useRef();
 	//   console.log(Posts);
 
 	useEffect(() => {
@@ -45,7 +49,12 @@ const PostsCard = () => {
 		};
 		getPosts();
 	}, []);
+	console.log(currentUserData)
+	console.log(comments)
 
+	useEffect(() => {
+		scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
+	}, [comments]);
 	const handlelike = async (id, allLikes) => {
 		const userid = auth.currentUser.uid;
 		if (allLikes.includes(userid)) {
@@ -71,7 +80,10 @@ const PostsCard = () => {
 				comments: arrayUnion({
 					id: currentUserId,
 					usercomment: text,
+					name:currentUserData[0].username,
 					userProfile: '',
+					createdAt:Timestamp.fromDate(new Date()),
+				
 				}),
 			});
 		}
@@ -105,7 +117,7 @@ const PostsCard = () => {
 										gotoProfile(post.userId);
 									}}
 								>
-									<img src={IMG} alt='' />
+									<img src={post?.profilePicture || IMG} alt='' />
 								</div>
 								<p
 									className='username'
@@ -150,12 +162,51 @@ const PostsCard = () => {
 							<p className='post-time'>
 								<Moment fromNow>{post.uploadedAt.toDate()}</Moment>
 							</p>
-							<p className='comments-link'>
+							<p className='comments-link' onClick={()=>{
+								setcomments(post.comments)
+								setshow(true)}}>
 								{post.comments?.length > 1
 									? `View ${post.comments?.length} comments`
 									: `View ${post.comments?.length} comment`}
 							</p>
+							<div className={show ? "comments-modal":"cmts-close"}>
+								<div className='head'><p>Comments</p><button onClick={()=>setshow(false)}>CLOSE</button></div>
+								<div className='viewcoments'>
+								{post.comments && post.comments.map(comment=>(
+									<div className='user-comment' key={comment.createdAt}>
+										<h6>{comment.name}</h6>
+										<p>{comment.usercomment}</p>
+										
+										<small>
+										<Moment fromNow>
+											{comment.createdAt.toDate()}</Moment>
+											</small>
+										
+									</div>
+								))
+								}
+								</div>
+								<div className='inputdiv'>
+								<img src={SMILE} className='icon' alt='' />
+								<input type='text' 
+								placeholder='Add a comment'
+								
+								value={text}
+								onChange={(e) => {
+									setText(e.target.value);
+								}}
+								/>
+								<button
+								// className='comment-btn'
+								onClick={() => {
+									handleComment(post.id, post.comments);
+								}}
+								disabled={buttonDisable}>POST</button>
+								</div>
+							</div>
 						</div>
+
+
 						<div className='comment-wrapper'>
 							<img src={SMILE} className='icon' alt='' />
 							<input
@@ -178,6 +229,7 @@ const PostsCard = () => {
 							</button>
 						</div>
 					</div>
+					
 				))}
 		</div>
 	);

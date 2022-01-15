@@ -24,7 +24,7 @@ const Chat = () => {
 	const [img, setimg] = useState('');
 	const [sendDisabled, setsendDisabled] = useState(false);
 	const [lmsg, setlmsg] = useState();
-	console.log(currentUserData.username);
+	// console.log(currentUserData.username);
 	const user1 = auth.currentUser.uid;
 
 	const scrollRef = useRef();
@@ -58,18 +58,18 @@ const Chat = () => {
 				createdAt: Timestamp.fromDate(new Date()),
 				media: dlUrl || '',
 			});
-			settext('');
 			setsendDisabled(false);
-			await setDoc(doc('lastMsg', id), {
+			await setDoc(doc(db,'lastMsg', id), {
 				text,
 				from: user1,
 				to: user2,
 				createdAt: Timestamp.fromDate(new Date()),
 				unread: true,
 			});
+			settext('');
 		}
 	};
-
+console.log(currentUserData)
 	const selectuser = async (user) => {
 		setchat(user);
 		const user2 = user.id;
@@ -90,9 +90,10 @@ const Chat = () => {
 	return (
 		<>
 			<NavBar />
+			{currentUserData &&
 			<div className='chat-div'>
 				<div className='owner-name'>
-					<p className='name'>{currentUserData.username}</p>
+					<p className='name'>{currentUserData[0].username}</p>
 					<div className='user-chats'>
 						{usersData &&
 							usersData.map((user) => {
@@ -301,6 +302,7 @@ const Chat = () => {
 					</div>
 				</div>
 			</div>
+			}
 		</>
 	);
 };

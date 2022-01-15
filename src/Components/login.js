@@ -30,7 +30,7 @@ const LoginForm = () => {
 		}
 	};
 	return (
-		User === null && (
+		!User && (
 			<div className='parent-login'>
 				<div className='login-form'>
 					<div className='logo-div'>Instagram</div>
