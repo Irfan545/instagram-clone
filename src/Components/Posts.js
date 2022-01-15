@@ -137,7 +137,7 @@ const PostsCard = () => {
 								<img
 									src={LIKE}
 									className={`icon ${
-										post.likes.includes(auth.currentUser.uid) ? 'liked' : ''
+										post.likes.includes(auth.currentUser?.uid) ? 'liked' : ''
 									}`}
 									onClick={() => {
 										handlelike(post.id, post.likes);

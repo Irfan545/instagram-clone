@@ -84,7 +84,7 @@ export default function ContextProvoider({ children }) {
 	};
 	return (
 		!loader &&
-		!loader2 && (
+		(
 			<userContext.Provider value={value}>{children}</userContext.Provider>
 		)
 	);

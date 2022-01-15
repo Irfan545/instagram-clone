@@ -13,7 +13,7 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { signOut } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, db, storage } from "../firebaseconfig";
-import IMG from "../profile.png";
+import LOGO2 from "../logo2.png";
 import LOGO from "../img/logo.PNG";
 import HOME from "../img/home.PNG";
 import MESSENGER from "../img/messenger.PNG";
@@ -30,7 +30,7 @@ const NavBar = () => {
   const messageRoute = () => {
     navigate("/chats");
   };
-  console.log(currentUserData[0].email);
+  console.log(currentUserData);
   // console.log(getPosts);
   console.log(usersData);
 
@@ -92,8 +92,8 @@ const NavBar = () => {
     }
   };
 
-  const logoutProfile = async (e) => {
-    e.preventDefault();
+  const logoutProfile = async () => {
+    // e.preventDefault();
     try {
       console.log(auth.currentUser.uid);
       const userId = auth.currentUser.uid;
@@ -149,12 +149,13 @@ const NavBar = () => {
             }}
           >
             
-            <img src={currentUserData[0]?.profileUrl || IMG} alt="profile" />
+            <img src={LOGO2} alt="logo" />
           
           </div>
           <div className="dropdown-content" id="dropdown_uniq">
-            <lable className='drop-items' onClick={myProfile}>My Profile</lable>
-           <lable htmlFor="pic-upload" className="drop-items">Upload Profile
+            <label className='drop-items' onClick={myProfile}>My Profile</label>
+            <div>
+           <label htmlFor="pic-upload" className="drop-items">Upload Profile
             <input
               type="file"
               accept="image/*"
@@ -162,10 +163,11 @@ const NavBar = () => {
               style={{ display: "none" }}
               id="pic-upload"
             />
-            </lable>
-            <a style={{textAlign:"center",borderTop:"1px solid #ddd"}} href="logout" onClick={logoutProfile}>
+            </label>
+            </div>
+            <button onClick={logoutProfile} style={{textAlign:"center",borderTop:"1px solid #ddd"}}>
               Logout
-            </a>
+            </button>
           </div>
         </div>
       </div>
