@@ -440,6 +440,12 @@ body{
     
      width: calc(100vw- 160px); 
     } 
+    .parent-login{
+        min-width: 30vw;
+        height: auto;
+        margin: 0;
+        padding: .5rem;
+    }
 }
 .drop-items{
     /* style={{cursor:"pointer",padding:"5px 0",display:"block",textAlign:"center"}} */
@@ -460,8 +466,13 @@ body{
     }
     
     .chat-div{
-
         margin: 15px 15px;
+    }
+    .parent-login{
+        min-width: 50vw !important;
+        height: auto;
+        margin: 0;
+        padding: .5rem;
     }
 }
 
@@ -855,4 +866,71 @@ body{
 
 .dropdown-content a:hover {
     background-color: #f1f1f1;
+}
+
+
+
+/* loggin page design  */
+.info-div{
+    text-align: center;
+}
+.error-div{
+    background-color: rgb(247, 216, 216);
+    border:1px solid rgb(255, 100, 100);
+    color: rgb(255, 100, 100);
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+}
+.parent-login{
+    
+    width:30vw;
+border:1px solid rgba(27, 31, 35, 0.20);
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 10vh;
+    padding: 1rem;
+}
+.form-div{
+    padding: .5rem;
+    
+}
+.form-div button{
+    margin-top: .8rem;
+    width: 100%;
+    font-size: 1rem;
+    color: #fff;
+    padding: .3rem;
+    background-color: #0998F6;
+    outline: none;
+}
+.form-div a{
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    
+}
+.form-div p{
+    margin: 0;
+    padding: 0;
+    padding-top: .5rem;
+    padding-bottom: .2rem;
+}
+.form-div input{
+width: 100%;
+outline: none;
+font-size: 1rem;
+margin: .5rem 0 ;
+padding: .4rem;
+border: 1px solid #ddd;
+border-radius: .2rem;
+}
+.logo-div{
+    text-align: center;
+}
+.logo-div img{
+
+    width: 70%;
+    object-fit: cover;
 }

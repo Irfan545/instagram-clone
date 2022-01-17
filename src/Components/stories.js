@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 const Stories = () => {
 	const { usersData,currentUserData } = useContextProvoider();
 	const navigate = useNavigate();
-
+console.log(currentUserData)
 	const Logout = async (e) => {
 		e.preventDefault();
 		try {
@@ -65,69 +65,32 @@ const Stories = () => {
 					{/* <!-- left section ended --> */}
 					{/* <!-- right section start --> */}
 					<div className='right-col'>
-						<div className='profile-card'>
+						{currentUserData && <div className='profile-card'>
 							<div className='profile-pic'>
-								<img src='img/profile-pic.png' alt='' />
+								<img src={ currentUserData[0]?.profileUrl || IMG} alt='' />
 							</div>
 							<div>
-								<p className='username'>modern_web_channel</p>
-								<p className='sub-text'>kunaal kumar</p>
+								<p className='username'>{currentUserData[0]?.email}</p>
+								<p className='sub-text'>{currentUserData[0]?.username}</p>
 							</div>
 							<button className='action-btn' onClick={Logout}>
 								Logout
 							</button>
-						</div>
+						</div>}
 						<p className='suggestion-text'>Suggestions for you</p>
-						<div className='profile-card'>
+						
+						{usersData && usersData.map(user=>(
+							<div className='profile-card'>
 							<div className='profile-pic'>
-								<img src='img/cover 9.png' alt='' />
+								<img src={user?.profileUrl || IMG} alt='' />
 							</div>
 							<div>
-								<p className='username'>modern_web_channel</p>
-								<p className='sub-text'>followed bu user</p>
+								<p className='username'>{user?.email}</p>
+								<p className='sub-text'>{user?.username}</p>
 							</div>
 							<button className='action-btn'>follow</button>
 						</div>
-						<div className='profile-card'>
-							<div className='profile-pic'>
-								<img src='img/cover 10.png' alt='' />
-							</div>
-							<div>
-								<p className='username'>modern_web_channel</p>
-								<p className='sub-text'>followed bu user</p>
-							</div>
-							<button className='action-btn'>follow</button>
-						</div>
-						<div className='profile-card'>
-							<div className='profile-pic'>
-								<img src='img/cover 11.png' alt='' />
-							</div>
-							<div>
-								<p className='username'>modern_web_channel</p>
-								<p className='sub-text'>followed bu user</p>
-							</div>
-							<button className='action-btn'>follow</button>
-						</div>
-						<div className='profile-card'>
-							<div className='profile-pic'>
-								<img src='img/cover 12.png' alt='' />
-							</div>
-							<div>
-								<p className='username'>modern_web_channel</p>
-								<p className='sub-text'>followed bu user</p>
-							</div>
-							<button className='action-btn'>follow</button>
-						</div>
-						<div className='profile-card'>
-							<div className='profile-pic'>
-								<img src='img/cover 13.png' alt='' />
-							</div>
-							<div>
-								<p className='username'>modern_web_channel</p>
-								<p className='sub-text'>followed bu user</p>
-							</div>
-							<button className='action-btn'>follow</button>
-						</div>
+						))}
 					</div>
 					{/* <!-- right section ennded --> */}
 				</div>

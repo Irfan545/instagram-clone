@@ -1,11 +1,13 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router';
+import LOGO from '../img/logo.PNG'
 import { useContextProvoider } from '../context';
 import { auth } from '../firebaseconfig';
 
 const LoginForm = () => {
 	const { User } = useContextProvoider();
+	const [error,seterror] = useState();
 	const { state } = useLocation();
 	const emailRef = useRef();
 	const passwordRef = useRef();
@@ -27,18 +29,21 @@ const LoginForm = () => {
 			navigate('/');
 		} catch (e) {
 			console.log(e);
+			seterror(e.message);
+			emailRef.current.value="";
+			passwordRef.current.value="";
 		}
 	};
 	return (
 		!User && (
 			<div className='parent-login'>
 				<div className='login-form'>
-					<div className='logo-div'>Instagram</div>
+					<div className='logo-div'><img src={LOGO} alt='logo.png'/></div>
 					<div className='form-div'>
 						<form>
-							<p>Email:</p>
+							
 							<input ref={emailRef} type='email' placeholder='Email' />
-							<p>Password:</p>
+							
 							<input ref={passwordRef} type='password' placeholder='Password' />
 							<button onClick={login}>Log In</button>
 						</form>
@@ -49,6 +54,7 @@ const LoginForm = () => {
 						</div>
 					</div>
 				</div>
+				{error && <div className='error-div'>{error}</div>}
 			</div>
 		)
 	);

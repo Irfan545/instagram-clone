@@ -12,8 +12,8 @@ export default function RequiredAuth({ children }) {
 	return user1 !== null  ? (
 		children
 	) : (
-		// <Navigate to='/login' replace state={{ path: location.pathname }} />
-		<LoginForm/>
+		<Navigate to='/login' replace state={{ path: location.pathname }} />
+		// <LoginForm/>
 	);
 }
 // this needs to understand

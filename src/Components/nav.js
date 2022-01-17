@@ -7,7 +7,8 @@ import {
   query,
   Timestamp,
   updateDoc,
-  where
+  where,
+  writeBatch
 } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { signOut } from "firebase/auth";
@@ -73,6 +74,13 @@ const NavBar = () => {
       const Profile_url = await getDownloadURL(storageRef, imgDetails.name);
       await updateDoc(doc(db,"users",auth.currentUser.uid),{
         profileUrl:Profile_url,
+      })
+      const batch=writeBatch(db);
+
+      const collectionRef= collection(db,'posts')
+      
+     batch.update(collectionRef,{
+        profilePicture:Profile_url,
       })
     }
   };
@@ -165,9 +173,9 @@ const NavBar = () => {
             />
             </label>
             </div>
-            <button onClick={logoutProfile} style={{textAlign:"center",borderTop:"1px solid #ddd"}}>
+            <label onClick={logoutProfile} className="drop-items">
               Logout
-            </button>
+            </label>
           </div>
         </div>
       </div>
