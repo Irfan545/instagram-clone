@@ -7,7 +7,7 @@ import { auth } from "../firebaseconfig";
 import Loader from "./loader";
 
 const LoginForm = () => {
-  const { User,load,setload } = useContextProvoider();
+  const { User,load,setload,setUser } = useContextProvoider();
   const [error, seterror] = useState();
   const { state } = useLocation();
   const emailRef = useRef();
@@ -30,6 +30,7 @@ const LoginForm = () => {
       const password = passwordRef.current.value;
       await signInWithEmailAndPassword(auth, email, password);
       setload(false);
+      setUser(true)
       navigate("/");
     } catch (e) {
     

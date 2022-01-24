@@ -140,7 +140,6 @@ const Chat = () => {
 
 				<div className='chat-container'>
 					{selected ? 
-					
 					<div>
 					<div className='chat-profile'>
 						<div className='chat-img-name'>

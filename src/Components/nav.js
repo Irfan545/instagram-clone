@@ -24,15 +24,15 @@ import LIKE from "../img/like.PNG";
 import { useContextProvoider } from "../context";
 import { useState } from "react";
 const NavBar = () => {
-  const { currentUserData, setgetPosts, usersData ,load ,setload } = useContextProvoider();
+  const { currentUserData, setgetPosts, usersData ,setUser,load ,setload } = useContextProvoider();
   const [isOpen, setIsOpen] = useState(false);
   const [pload,setpload] = useState(false);
   // const [profilepic,setprofilepic]=useState();
   const navigate = useNavigate();
   const messageRoute = () => {
-    if(usersData){
+    
       navigate("/chats");
-    }
+    
   };
 
   const UploadImg = async (e) => {
@@ -113,7 +113,6 @@ const NavBar = () => {
     // e.preventDefault();
     setload(true)
     try {
-      
       const userId = auth.currentUser.uid;
       const docRef = doc(db, "users", userId);
       const payload = {
@@ -123,10 +122,11 @@ const NavBar = () => {
       await updateDoc(docRef, payload);
       await signOut(auth);
       setload(false)
+      setUser(false)
       navigate("/login");
     } catch (e) {
       setload(false)
-      (e.error);
+      
     }
   };
 

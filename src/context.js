@@ -18,7 +18,7 @@ export function useContextProvoider() {
 }
 
 export default function ContextProvoider({ children }) {
-	const [User, setUser] = useState(null);
+	const [User, setUser] = useState(false);
 	const [loader, setLoader] = useState(true);
 	const [loader2, setLoader2] = useState(true);
 	const [usersData, setUsersData] = useState([]);
@@ -26,7 +26,7 @@ export default function ContextProvoider({ children }) {
 	const [load,setload] = useState(false)
 	// const [currentUserPosts, setcurrentUserPosts] = useState();
 	const [getPosts, setgetPosts] = useState();
-	
+
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
 			setload(true)
@@ -42,12 +42,13 @@ export default function ContextProvoider({ children }) {
 						docSnap.forEach((d) => {
 							user.push(d.data());
 						});
+						// setUser(true)
 						setcurrentUserData(user);
-						setLoader2(false);
-						setload(false)
+						// setLoader2(true);
+						// setload(false)
 					} catch (e) {
-						setload(false)
-						setLoader2(false);
+						// setload(false)
+						// setLoader2(false);
 						
 					}
 				};
@@ -55,20 +56,36 @@ export default function ContextProvoider({ children }) {
 			} else {
 				setcurrentUserData(user);
 				
-				setUser(user);
-				setload(false)
+				// setUser(user);
+				// setUser(false);
+				// setload(false)
 			}
-			setUser(user);
-			setLoader(false);
-			setload(false)
+			// setUser(user);
+			// setUser(false);
+			// setLoader(false);
+			// setload(false)
 		});
 		return unsubscribe();
 	}, []);
 
 	
 
+useEffect(()=>{
+	const u = localStorage.getItem("user");
+	console.log(u);
+	u && JSON.parse(u) ? setUser(true) : setUser(false)
+},[])
+	useEffect(()=>{
+		localStorage.setItem("user",User);
+		
+	},[User])
+
+
+
+	
+
 	useEffect(() => {
-		const unsubscribe = ()=>{
+		
 			setload(true)
 			const q = query(collection(db, 'users'));
 			const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -81,14 +98,13 @@ export default function ContextProvoider({ children }) {
 				return unsubscribe();
 			});
 			setload(false)
-		}
-		return unsubscribe
 	}, []);
 
 	
 
 	const value = {
 		User,
+		setUser,
 		usersData,
 		currentUserData,
 		getPosts,

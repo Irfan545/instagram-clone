@@ -9,9 +9,9 @@ import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
 const Stories = () => {
-	const { usersData,currentUserData,load,setload } = useContextProvoider();
+	const { usersData,currentUserData,load,setload,setUser } = useContextProvoider();
 	const navigate = useNavigate();
-
+	
 	const Logout = async (e) => {
 		setload(true)
 		e.preventDefault();
@@ -25,10 +25,11 @@ const Stories = () => {
 			await updateDoc(docRef, payload);
 			await signOut(auth);
 			setload(false)
+			// setUser(false)
 			navigate('/login');
 		} catch (e) {
 			setload(false)
-			(e);
+			
 		}
 	};
 	return (

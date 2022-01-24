@@ -8,7 +8,7 @@ import LOGO from '../img/logo.PNG'
 
 const Register = () => {
 	const [error,seterror]=useState();
-	const { User,setload } = useContextProvoider();
+	const { User,setload , setUser } = useContextProvoider();
 	const { state } = useLocation();
 	const useremail = useRef();
 	const cpassword = useRef();
@@ -31,6 +31,7 @@ const Register = () => {
 					email,
 					password,
 				);
+				setUser(true);
 				navigate('/');
 		
 				const docRef = doc(db, 'users', userDetail.user.uid);
@@ -67,6 +68,7 @@ const Register = () => {
 			navigate(state?.path || '/');
 		}
 	}, [User, state?.path, navigate]);
+	
 	return (
 		<>
 			<div className='parent-login'>
