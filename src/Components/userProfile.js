@@ -7,13 +7,13 @@ const UserProfile = () => {
     const {getPosts , usersData}= useContextProvoider();
     const {id}=useParams();
     const [profileUser,setProfileUser]=useState();
-    // console.log(usersData)
+    // (usersData)
 
     useEffect(()=>{
         const getUser=()=>{
             usersData.forEach(user=>{
             if(user.id===id){
-                // console.log(user)
+                // (user)
                 setProfileUser(user)
             }
         })

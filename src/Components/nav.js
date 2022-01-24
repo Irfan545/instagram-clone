@@ -24,21 +24,22 @@ import LIKE from "../img/like.PNG";
 import { useContextProvoider } from "../context";
 import { useState } from "react";
 const NavBar = () => {
-  const { currentUserData, setgetPosts, usersData } = useContextProvoider();
+  const { currentUserData, setgetPosts, usersData ,load ,setload } = useContextProvoider();
   const [isOpen, setIsOpen] = useState(false);
+  const [pload,setpload] = useState(false);
   // const [profilepic,setprofilepic]=useState();
   const navigate = useNavigate();
   const messageRoute = () => {
-    navigate("/chats");
+    if(usersData){
+      navigate("/chats");
+    }
   };
-  console.log(currentUserData);
-  // console.log(getPosts);
-  console.log(usersData);
 
   const UploadImg = async (e) => {
+    setpload(true)
     if (e?.target?.files[0]) {
-      const imgDetails = e.target.files[0];
-      console.log(e.target.files[0]);
+      const imgDetails = e?.target?.files[0];
+      
       const storageRef = ref(
         storage,
         `posts/${auth.currentUser.uid}-${Timestamp.fromDate(new Date())}`
@@ -58,14 +59,16 @@ const NavBar = () => {
       await updateDoc(doc(db, "users", auth.currentUser.uid), {
         posts: arrayUnion(url)
       });
-      console.log(url);
+      
     }
+    setpload(false)
   };
 
   const profilepic = async (e) => {
+    setpload(true)
     if(e?.target?.files[0]){
       const imgDetails = e.target.files[0];
-      console.log(e.target.files[0]);
+      
       const storageRef = ref(
         storage,
         `profile-pics/${auth.currentUser.uid}-${Timestamp.fromDate(new Date())}`
@@ -82,9 +85,13 @@ const NavBar = () => {
      batch.update(collectionRef,{
         profilePicture:Profile_url,
       })
+      setpload(false)
     }
+    setpload(false)
   };
+
   const myProfile = async () => {
+    setpload(true)
     const uid = auth.currentUser.uid;
     try {
       const q = query(collection(db, "posts"), where("userId", "==", uid));
@@ -94,16 +101,19 @@ const NavBar = () => {
         posts.push({ data: d.data(), id: d.id });
       });
       setgetPosts(posts);
+      setpload(false)
       navigate(`/userProfile/${uid}`);
     } catch (e) {
-      console.log(e);
+      
+      setpload(false)
     }
   };
 
   const logoutProfile = async () => {
     // e.preventDefault();
+    setload(true)
     try {
-      console.log(auth.currentUser.uid);
+      
       const userId = auth.currentUser.uid;
       const docRef = doc(db, "users", userId);
       const payload = {
@@ -112,13 +122,16 @@ const NavBar = () => {
       };
       await updateDoc(docRef, payload);
       await signOut(auth);
+      setload(false)
       navigate("/login");
     } catch (e) {
-      console.log(e.error);
+      setload(false)
+      (e.error);
     }
   };
 
   return (
+    <>
     <nav className="navbar">
       <div className="nav-wrapper">
         <img src={LOGO} className="brand-img" alt="" />
@@ -180,6 +193,8 @@ const NavBar = () => {
         </div>
       </div>
     </nav>
+  
+    </>
   );
 };
 

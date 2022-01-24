@@ -9,10 +9,11 @@ import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
 const Stories = () => {
-	const { usersData,currentUserData } = useContextProvoider();
+	const { usersData,currentUserData,load,setload } = useContextProvoider();
 	const navigate = useNavigate();
-console.log(currentUserData)
+
 	const Logout = async (e) => {
+		setload(true)
 		e.preventDefault();
 		try {
 			const userId = auth.currentUser.uid;
@@ -23,9 +24,11 @@ console.log(currentUserData)
 			};
 			await updateDoc(docRef, payload);
 			await signOut(auth);
+			setload(false)
 			navigate('/login');
 		} catch (e) {
-			console.log(e);
+			setload(false)
+			(e);
 		}
 	};
 	return (
@@ -39,6 +42,7 @@ console.log(currentUserData)
 		//   </div>
 		<>
 			<NavBar />
+			
 			<section className='main'>
 				<div className='wrapper'>
 					<div className='left-col'>
@@ -80,7 +84,7 @@ console.log(currentUserData)
 						<p className='suggestion-text'>Suggestions for you</p>
 						
 						{usersData && usersData.map(user=>(
-							<div className='profile-card'>
+							<div className='profile-card'key={user.id}>
 							<div className='profile-pic'>
 								<img src={user?.profileUrl || IMG} alt='' />
 							</div>

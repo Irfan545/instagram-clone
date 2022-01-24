@@ -1,4 +1,4 @@
-import IMG from '../profile.jpg';
+import IMG from '../profile.png';
 import NavBar from './nav';
 import { useContextProvoider } from '../context';
 import { useEffect, useRef, useState } from 'react';
@@ -20,12 +20,13 @@ const Chat = () => {
 	const { usersData, currentUserData } = useContextProvoider();
 	const [msgs, setmsgs] = useState();
 	const [text, settext] = useState();
+	const [selected, setselected] = useState(false);
 	const [chat, setchat] = useState('');
 	const [img, setimg] = useState('');
 	const [sendDisabled, setsendDisabled] = useState(false);
 	const [lmsg, setlmsg] = useState();
-	// console.log(currentUserData.username);
-	const user1 = auth.currentUser.uid;
+	
+	const user1 = auth?.currentUser?.uid;
 
 	const scrollRef = useRef();
 
@@ -69,9 +70,10 @@ const Chat = () => {
 			settext('');
 		}
 	};
-console.log(currentUserData)
+
 	const selectuser = async (user) => {
 		setchat(user);
+		setselected(true);
 		const user2 = user.id;
 		const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`;
 		const msgRef = collection(db, 'messages', id, 'chat');
@@ -90,7 +92,7 @@ console.log(currentUserData)
 	return (
 		<>
 			<NavBar />
-			{currentUserData &&
+			{currentUserData  &&
 			<div className='chat-div'>
 				<div className='owner-name'>
 					<p className='name'>{currentUserData[0].username}</p>
@@ -137,6 +139,9 @@ console.log(currentUserData)
 				</div>
 
 				<div className='chat-container'>
+					{selected ? 
+					
+					<div>
 					<div className='chat-profile'>
 						<div className='chat-img-name'>
 							<img src={IMG} alt='img' />
@@ -188,16 +193,6 @@ console.log(currentUserData)
 						</svg>
 					</div>
 					<div className='messages'>
-						{/* <div className='mymsgs'>
-							<div className='there-msg'>
-								<p>heyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy</p>
-							</div>
-						</div>
-						<div className='theremsgs'>
-							<div className='there-msg'>
-								<p>hello</p>
-							</div>
-						</div> */}
 
 						{msgs?.map((message, i) => (
 							<div
@@ -207,7 +202,8 @@ console.log(currentUserData)
 								}`}
 								ref={scrollRef}
 							>
-								<p
+								
+								<div
 									className={
 										message.from === auth.currentUser.uid ? 'me' : 'friend'
 									}
@@ -226,7 +222,8 @@ console.log(currentUserData)
 											<Moment fromNow>{message.createdAt.toDate()}</Moment>
 										</small>
 									</div>
-								</p>
+								</div>
+								
 							</div>
 						))}
 
@@ -300,6 +297,8 @@ console.log(currentUserData)
 							</div>
 						</div>
 					</div>
+					</div>
+				:<h3 className='select_class'>Select user to start conversation</h3>}
 				</div>
 			</div>
 			}

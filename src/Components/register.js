@@ -8,18 +8,18 @@ import LOGO from '../img/logo.PNG'
 
 const Register = () => {
 	const [error,seterror]=useState();
-	const { User } = useContextProvoider();
+	const { User,setload } = useContextProvoider();
 	const { state } = useLocation();
 	const useremail = useRef();
 	const cpassword = useRef();
 	const name = useRef();
 	const userpassword = useRef();
 	const navigate = useNavigate();
-	// console.log(User)
+	// (User)
 	const registerUser = async (e) => {
 		e.preventDefault();
-		console.log(name.current.value);
-		console.log(userpassword.current.value);
+		setload(true);
+		
 		const user_name = name.current.value;
 		const email = useremail.current.value;
 		const password = userpassword.current.value;
@@ -32,7 +32,7 @@ const Register = () => {
 					password,
 				);
 				navigate('/');
-				console.log(userDetail.user.uid);
+		
 				const docRef = doc(db, 'users', userDetail.user.uid);
 				const payload = {
 					username: user_name,
@@ -48,11 +48,12 @@ const Register = () => {
 				useremail.current.value="";
 				userpassword.current.value="";
 				cpassword.current.value="";
-				console.log("password Do Not MAtch")
+		
 				seterror("Password do not match!")
 			}
+			setload(false)
 		} catch (e) {
-			console.log(e.error);
+		
 			seterror(e.message);
 			name.current.value=""
 			userpassword.current.value=""

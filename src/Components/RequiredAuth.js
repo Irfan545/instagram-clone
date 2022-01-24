@@ -8,8 +8,8 @@ export default function RequiredAuth({ children }) {
 	const {User} = useContextProvoider();
 	const location = useLocation();
 	const user1 = auth.currentUser?.uid;
-	// console.log(user1);
-	return user1 !== null  ? (
+	// (user1);
+	return user1  ? (
 		children
 	) : (
 		<Navigate to='/login' replace state={{ path: location.pathname }} />

@@ -33,7 +33,7 @@ const PostsCard = () => {
 	const navigate = useNavigate();
 	const [comments,setcomments]=useState();
 	const scrollRef = useRef();
-	//   console.log(Posts);
+	//   (Posts);
 
 	useEffect(() => {
 		const getPosts = async () => {
@@ -49,8 +49,7 @@ const PostsCard = () => {
 		};
 		getPosts();
 	}, []);
-	console.log(currentUserData)
-	console.log(comments)
+	
 
 	useEffect(() => {
 		scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -73,7 +72,7 @@ const PostsCard = () => {
 	const handleComment = async (id, postcomments) => {
 		setbuttonDisable(true);
 		const currentUserId = auth.currentUser.uid;
-		console.log(text);
+		
 		if (text !== '') {
 			setText('');
 			await updateDoc(doc(db, 'posts', id), {
@@ -100,7 +99,7 @@ const PostsCard = () => {
 			setgetPosts(posts);
 			navigate(`/userProfile/${userid}`);
 		} catch (e) {
-			console.log(e);
+			
 		}
 	};
 	return (

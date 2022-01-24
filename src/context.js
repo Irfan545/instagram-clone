@@ -9,6 +9,7 @@ import {
 } from 'firebase/firestore';
 import { db } from './firebaseconfig';
 import { auth } from './firebaseconfig';
+import Loader from './Components/loader'
 
 const userContext = createContext();
 
@@ -22,11 +23,13 @@ export default function ContextProvoider({ children }) {
 	const [loader2, setLoader2] = useState(true);
 	const [usersData, setUsersData] = useState([]);
 	const [currentUserData, setcurrentUserData] = useState();
+	const [load,setload] = useState(false)
 	// const [currentUserPosts, setcurrentUserPosts] = useState();
 	const [getPosts, setgetPosts] = useState();
-
+	
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
+			setload(true)
 			if (user !== null) {
 				const getCurrentUserData = async () => {
 					try {
@@ -41,36 +44,45 @@ export default function ContextProvoider({ children }) {
 						});
 						setcurrentUserData(user);
 						setLoader2(false);
-						
+						setload(false)
 					} catch (e) {
+						setload(false)
 						setLoader2(false);
-						console.log(e);
+						
 					}
 				};
 				getCurrentUserData();
 			} else {
 				setcurrentUserData(user);
-				console.log("No User")
+				
 				setUser(user);
+				setload(false)
 			}
 			setUser(user);
 			setLoader(false);
+			setload(false)
 		});
-
 		return unsubscribe();
 	}, []);
 
-	useEffect(() => {
-		const q = query(collection(db, 'users'));
-		const unsubscribe = onSnapshot(q, (querySnapshot) => {
-			const users = [];
-			querySnapshot.forEach((doc) => {
-				users.push(doc.data());
-			});
-			setUsersData(users);
+	
 
-			return unsubscribe();
-		});
+	useEffect(() => {
+		const unsubscribe = ()=>{
+			setload(true)
+			const q = query(collection(db, 'users'));
+			const unsubscribe = onSnapshot(q, (querySnapshot) => {
+				const users = [];
+				querySnapshot.forEach((doc) => {
+					users.push(doc.data());
+				});
+				setUsersData(users);
+	
+				return unsubscribe();
+			});
+			setload(false)
+		}
+		return unsubscribe
 	}, []);
 
 	
@@ -81,12 +93,13 @@ export default function ContextProvoider({ children }) {
 		currentUserData,
 		getPosts,
 		setgetPosts,
+		load,
+		setload
 	};
 	return (
-		!loader &&
-		(
+		
 			<userContext.Provider value={value}>{children}</userContext.Provider>
-		)
+		
 	);
 }
 
